@@ -7,6 +7,7 @@
         &larr; Back to Jobs
     </a>
 
-    <h2 class="font-bold text-lg text-white mb-2">{{ $job['title'] }}</h2>
-    <p class="text-gray-400 mb-4">This job pays {{ $job['salary'] }} per year.</p>
+    <h2 class="font-bold text-lg text-white mb-2">{{ $job->title }}</h2>
+    <p class="text-gray-400 mb-2">Employer: {{ $job->employer->name }}</p>
+    <p class="text-gray-400 mb-4">This job pays {{ $job->salary }} per year.</p>
 </x-layout>
