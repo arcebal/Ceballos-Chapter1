@@ -11,9 +11,15 @@ class Job extends Model
 
     protected $table = 'job_listings';
 
-    // Each job belongs to one employer
+    // One-to-Many: Each job belongs to an employer
     public function employer()
     {
-        return $this->belongsTo(Employer::class);
+        return $this->belongsTo(\App\Models\Employer::class);
+    }
+
+    // Many-to-Many: Each job can have multiple tags
+    public function tags()
+    {
+        return $this->belongsToMany(\App\Models\Tag::class, 'job_listing_tag', 'job_listing_id', 'tag_id');
     }
 }
