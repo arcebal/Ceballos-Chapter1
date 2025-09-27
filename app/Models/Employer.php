@@ -9,9 +9,10 @@ class Employer extends Model
 {
     use HasFactory;
 
-    // One-to-Many: An employer can have multiple jobs
+    protected $fillable = ['name'];
+
     public function jobs()
     {
-        return $this->hasMany(\App\Models\Job::class);
+        return $this->hasMany(Job::class);
     }
 }
