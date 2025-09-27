@@ -34,6 +34,10 @@ Route::post('/jobs', function () {
         'employer_id' => ['required', 'exists:employers,id'],
         'tags' => ['nullable', 'array'],
         'tags.*' => ['exists:tags,id'],
+    ], [
+        'employer_id.required' => 'The employer field is required.',
+        'tags.required' => 'Please select at least one tag.',
+        'tags.*.exists' => 'One or more selected tags are invalid.',
     ]);
 
     $job = Job::create([
@@ -47,7 +51,6 @@ Route::post('/jobs', function () {
         $job->tags()->sync($validated['tags']);
     }
 
-    // Flash a success message for SweetAlert
     session()->flash('success', 'Job added successfully!');
 
     return redirect('/jobs');
@@ -76,6 +79,10 @@ Route::patch('/jobs/{job}', function (Job $job) {
         'employer_id' => ['required', 'exists:employers,id'],
         'tags' => ['nullable', 'array'],
         'tags.*' => ['exists:tags,id'],
+    ], [
+        'employer_id.required' => 'The employer field is required.',
+        'tags.required' => 'Please select at least one tag.',
+        'tags.*.exists' => 'One or more selected tags are invalid.',
     ]);
 
     $job->update([
@@ -87,7 +94,6 @@ Route::patch('/jobs/{job}', function (Job $job) {
 
     $job->tags()->sync($validated['tags'] ?? []);
 
-    // Flash a success message for SweetAlert on update
     session()->flash('success', 'Job updated successfully!');
 
     return redirect('/jobs/' . $job->id);
@@ -97,7 +103,6 @@ Route::patch('/jobs/{job}', function (Job $job) {
 Route::delete('/jobs/{job}', function (Job $job) {
     $job->delete();
 
-    // Flash a success message for SweetAlert on delete
     session()->flash('success', 'Job deleted successfully!');
 
     return redirect('/jobs');
