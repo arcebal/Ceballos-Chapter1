@@ -12,6 +12,7 @@ class CreateJobListingsTable extends Migration
             $table->id();
             $table->foreignId('employer_id')->constrained()->cascadeOnDelete();
             $table->string('title');
+            $table->text('description'); // ✅ Added this
             $table->string('salary');
             $table->timestamps();
         });

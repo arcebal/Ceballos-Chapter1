@@ -1,22 +1,45 @@
 <x-layout>
     <x-slot:heading>
-        Jobs Page
+        Job Listings
     </x-slot:heading>
 
-    <div class="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-6">
+    <div class="space-y-4">
         @foreach ($jobs as $job)
-            <div class="bg-gray-900 rounded-lg p-6 hover:bg-gray-700 transition-shadow shadow-lg">
-                <a href="/jobs/{{ $job->id }}">
-                    <h3 class="text-xl font-bold text-white mb-2">{{ $job->title }}</h3>
-                    <p class="text-gray-400 mb-2">Pays {{ $job->salary }} per year.</p>
-                    <p class="text-gray-500 text-sm mb-2">Employer: {{ $job->employer->name }}</p>
-                </a>
-                <div class="mt-2">
+            <div class="p-4 border rounded-lg shadow-sm">
+                <!-- Job Title -->
+                <h2 class="text-lg font-semibold text-blue-600">
+                    {{ $job->title }}
+                </h2>
+
+                <!-- Employer -->
+                <p class="text-gray-600">
+                    Employer: {{ $job->employer->name }}
+                </p>
+
+                <!-- Salary -->
+                <p class="text-gray-500">
+                    Salary: ₱{{ number_format($job->salary) }}
+                </p>
+
+                <!-- Description -->
+                <p class="text-gray-700 mt-2">
+                    {{ $job->description }}
+                </p>
+
+                <!-- Tags -->
+                <div class="flex gap-2 mt-2">
                     @foreach ($job->tags as $tag)
-                        <span class="bg-gray-200 text-gray-700 text-xs font-semibold mr-2 px-2.5 py-0.5 rounded-full">{{ $tag->name }}</span>
+                        <span class="px-2 py-1 text-sm font-medium text-black bg-gray-200 rounded">
+                            {{ $tag->name }}
+                        </span>
                     @endforeach
                 </div>
             </div>
         @endforeach
+    </div>
+
+    <!-- Pagination -->
+    <div class="mt-6">
+        {{ $jobs->links() }}
     </div>
 </x-layout>
