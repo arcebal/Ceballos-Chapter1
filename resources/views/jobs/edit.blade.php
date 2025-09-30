@@ -11,21 +11,21 @@
             <!-- Title -->
             <div>
                 <label for="title" class="block text-sm font-medium text-black">Title</label>
-                <input type="text" name="title" id="title" class="block w-full rounded-md border-gray-300 shadow-sm sm:text-sm text-black" required value="{{ old('title', $job->title) }}">
+                <input type="text" name="title" id="title" class="block w-full rounded-md border-gray-300 shadow-sm sm:text-sm text-black"value="{{ old('title', $job->title) }}">
                 @error('title') <p class="text-xs text-red-500 mt-1">{{ $message }}</p> @enderror
             </div>
 
             <!-- Salary -->
             <div>
                 <label for="salary" class="block text-sm font-medium text-black">Salary</label>
-                <input type="text" name="salary" id="salary" class="block w-full rounded-md border-gray-300 shadow-sm sm:text-sm text-black" required value="{{ old('salary', $job->salary) }}">
+                <input type="text" name="salary" id="salary" class="block w-full rounded-md border-gray-300 shadow-sm sm:text-sm text-black"value="{{ old('salary', $job->salary) }}">
                 @error('salary') <p class="text-xs text-red-500 mt-1">{{ $message }}</p> @enderror
             </div>
 
             <!-- Employer -->
             <div>
                 <label for="employer_id" class="block text-sm font-medium text-black">Employer</label>
-                <select name="employer_id" id="employer_id" class="block w-full rounded-md border-gray-300 shadow-sm sm:text-sm text-black" required>
+                <select name="employer_id" id="employer_id" class="block w-full rounded-md border-gray-300 shadow-sm sm:text-sm text-black">
                     @foreach($employers as $employer)
                         <option value="{{ $employer->id }}" {{ $job->employer_id == $employer->id ? 'selected' : '' }}>
                             {{ $employer->name }}
@@ -52,7 +52,7 @@
             <!-- Description -->
             <div>
                 <label for="description" class="block text-sm font-medium text-black">Description</label>
-                <textarea name="description" id="description" rows="5" class="block w-full rounded-md border-gray-300 shadow-sm sm:text-sm text-black" required>{{ old('description', $job->description) }}</textarea>
+                <textarea name="description" id="description" rows="5" class="block w-full rounded-md border-gray-300 shadow-sm sm:text-sm text-black">{{ old('description', $job->description) }}</textarea>
                 @error('description') <p class="text-xs text-red-500 mt-1">{{ $message }}</p> @enderror
             </div>
 
